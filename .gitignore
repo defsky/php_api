@@ -21,3 +21,4 @@
 /fuel/app/config/crypt.php
 *.swp
 *~
+.env
