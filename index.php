@@ -1,5 +1,5 @@
 <?php
-require_once('vendor/autoload.php');
+require_once('vendor/framework.php');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -10,13 +10,27 @@ $response = (object)array(
     'data' => (object)array()
 );
 
+use App\Person;
+use App\Mir\Realm;
+
 try 
 {
     switch ($method)
     {
         case 'GET':
-            throw new Exception('you get the page', 1);
+            //throw new Exception('you get the page', 1);
+            $p1 = new Person('def');
+            $realm = new Realm('first realm');
 
+            $data = [
+                $p1->hello(),
+                $realm->status(),
+            ];
+
+            $response->ret = 0;
+            $response->message = 'you get the page';
+            $response->data = $data;
+            
             break;
         case 'POST':
             $data =json_decode( file_get_contents('php://input'), true);
