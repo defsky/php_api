@@ -1,4 +1,11 @@
 <?php
+namespace Core;
+
+/**
+ * MySQL封装
+ * 
+ * 单例类
+ */
 class MysqlDB
 {
     private $conn;
@@ -23,6 +30,10 @@ class MysqlDB
     }
     private function __clone(){}
 	
+	/**
+	 * 获取MySQL的实例
+	 * 
+	 */
     public static function getInstance()
 	{
         if(FALSE == (self::$_instance instanceof self)){
@@ -31,11 +42,19 @@ class MysqlDB
         return self::$_instance;
     }
 
+	/**
+	 * 执行sql查询
+	 */
     public function query($sql, $connection = '') 
 	{
         return $this->conn->query($sql);
     }
 
+	/**
+	 * 执行sql查询
+	 * 
+	 * 获取单行结果
+	 */
     public function getRow($sql, $type = MYSQL_ASSOC)
 	{
         $result = $this->query($sql);
@@ -50,6 +69,11 @@ class MysqlDB
 		}
     }
 
+	/**
+	 * 执行sql查询
+	 * 
+	 * 获取多行结果
+	 */
     public function getRows($sql, $type = MYSQL_ASSOC)
 	{
         $result = $this->query($sql);

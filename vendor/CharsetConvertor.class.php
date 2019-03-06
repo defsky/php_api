@@ -1,4 +1,6 @@
 <?php
+namespace Core;
+
 /** 字符编码转换类, ANSI、Unicode、Unicode big endian、UTF-8、UTF-8+Bom互相转换
 
 * Usage:
@@ -12,7 +14,6 @@
 */
 
 class CharsetConvertor
-// class start
 {
     private $_in_charset = null; // 源编码
     private $_out_charset = null; // 输出编码
@@ -107,5 +108,4 @@ class CharsetConvertor
         return $str;
     }
 
-} 
-// class end
+}

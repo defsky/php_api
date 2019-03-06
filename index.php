@@ -1,5 +1,5 @@
 <?php
-require_once('vendor/framework.php');
+require_once('vendor/bootstrap.php');
 
 $method = $_SERVER['REQUEST_METHOD'];
 
@@ -23,14 +23,14 @@ try
             $realm = new Realm('first realm');
 
             $data = [
-                $p1->hello(),
-                $realm->status(),
+                'Person' => $p1->hello(),
+                'Realm' => $realm->status(),
             ];
 
             $response->ret = 0;
             $response->message = 'you get the page';
             $response->data = $data;
-            
+
             break;
         case 'POST':
             $data =json_decode( file_get_contents('php://input'), true);

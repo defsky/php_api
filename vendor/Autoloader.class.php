@@ -1,4 +1,13 @@
 <?php
+namespace Core;
+
+if (! defined('DS')) {
+    define('DS', DIRECTORY_SEPARATOR);
+}
+
+if (! defined('ROOTDIR')) {
+    define('ROOTDIR', realpath(__DIR__ . DS . '../'));
+}
 
 /**
  * 自动加载器类
@@ -14,8 +23,8 @@ class Autoloader
      * 根名称空间路径映射表
      */
     private static $vendor_map = [
-        'App' => ROOTDIR . DS . 'app',
-        'Core' => ROOTDIR . DS . 'vendor',
+        'App' => 'app',
+        'Core' => 'vendor',
     ];
 
     /**
@@ -33,8 +42,8 @@ class Autoloader
             }
         }
         
-        throw new \Exception('class '. $classname .' undefined', -99);
-        //return false;
+        //throw new \Exception('class '. $classname .' undefined', -99);
+        return false;
     }
 
     /**
@@ -43,7 +52,7 @@ class Autoloader
     private static function parseFilePath($classname)
     {
         $vendor = explode('\\', $classname)[0];
-        $vendor_path = self::$vendor_map[$vendor];
+        $vendor_path = ROOTDIR . DS . self::$vendor_map[$vendor];
         $relative_path = substr($classname, strlen($vendor)) . self::$class_file_suffix;
         $file_path = strtr($vendor_path . DS . $relative_path, '\\', DS);
         
