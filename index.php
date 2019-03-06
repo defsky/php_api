@@ -34,23 +34,24 @@ try
             break;
         case 'POST':
             $data =json_decode( file_get_contents('php://input'), true);
+            print_r($data ? $data : 'no input');
+            print_r($_POST);
+            // $timestamp = $data['t'];
+            // $random = $data['r'];
+            // $signature = $data['s'];
+            // $params = $data['params'];
     
-            $timestamp = $data['t'];
-            $random = $data['r'];
-            $signature = $data['s'];
-            $params = $data['params'];
+            // $sig = new Signature($timestamp, $random);
     
-            $sig = new Signature($timestamp, $random);
-    
-            $response->ret = 0;
-            $response->message = 'you post the page';
-            $response->data = array(
-                't' => $timestamp,
-                'r' => $random,
-                's' => $signature,
-                's2' => $sig->digest(),
-                'p' => $params
-            );
+            // $response->ret = 0;
+            // $response->message = 'you post the page';
+            // $response->data = array(
+            //     't' => $timestamp,
+            //     'r' => $random,
+            //     's' => $signature,
+            //     's2' => $sig->digest(),
+            //     'p' => $params
+            // );
             break;
         default:
             throw new Exception('unknown request method', -98);

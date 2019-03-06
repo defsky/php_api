@@ -9,6 +9,6 @@ if (! defined('ROOTDIR')) {
 
 require_once('Autoloader.class.php');
 
-spl_autoload_register('Core\Autoloader::classLoader', true, true);
+spl_autoload_register('Core\Autoloader::classLoader');
 
 include_once('functions.php');

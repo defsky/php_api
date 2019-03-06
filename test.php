@@ -1,17 +1,15 @@
 <?php
 require_once('vendor/bootstrap.php');
 
-$a = [
-    'a' => [
-        'a1' => '1',
-        'a2' => '2'
-    ],
-    'b' => '3'
-];
+use Core\MysqlDB;
 
 try
 {
     print_r(config('database.connections.mysql'));
+    echo '<br>';
+    print_r(config('app.name'));
+    echo '<br>';
+    print_r(MysqlDB::getInstance()->getRows('select * from realmlist'));
 }
 catch (Exception $e)
 {

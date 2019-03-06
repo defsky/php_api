@@ -37,7 +37,7 @@ class Config
     /**
      * 类实例
      */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * 私有构造函数, 防止从外部实例化
@@ -63,10 +63,18 @@ class Config
             }
 
             if (array_key_exists($config_key, $this->env_map)) {
-                throw new \Exception('dumplicate key error in .env', -95);
+                throw new \Exception('dumplicate key in .env', -95);
             }
             $this->env_map[$config_key] = $config_value;
         }
+    }
+
+    /**
+     * 重写clone函数，防止对象克隆
+     */
+    private function __clone()
+    {
+
     }
 
     /**
@@ -74,7 +82,7 @@ class Config
      */
     public static function getInstance()
     {
-        if (! self::$instance instanceof self) {
+        if (false == (self::$instance instanceof self)) {
             self::$instance = new self();
         }
 

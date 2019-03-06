@@ -52,6 +52,12 @@ class Autoloader
     private static function parseFilePath($classname)
     {
         $vendor = explode('\\', $classname)[0];
+        
+        if (! array_key_exists($vendor, self::$vendor_map)) {
+            //throw new \Exception('undefined namespace \'' . $vendor . '\'', -94);
+            return ;
+        }
+
         $vendor_path = ROOTDIR . DS . self::$vendor_map[$vendor];
         $relative_path = substr($classname, strlen($vendor)) . self::$class_file_suffix;
         $file_path = strtr($vendor_path . DS . $relative_path, '\\', DS);

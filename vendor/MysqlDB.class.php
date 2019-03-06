@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use \mysqli;
+
 /**
  * MySQL封装
  * 
@@ -14,20 +16,20 @@ class MysqlDB
 
     private function __construct() 
 	{
-		global $config;
-		if ($config['debug'])
-		{
-			print_r($config['mysql']['host']);
-		}
+		$config = Config::getInstance()->get('database.connections.mysql');
 		
-        $this->conn = new mysqli($config['mysql']['host'], $config['mysql']['user'], $config['mysql']['pwd'], $config['mysql']['dbname']);
+        $this->conn = new mysqli($config['host'], $config['username'], $config['password'], $config['database']);
 		if ($this->conn->connect_error) {
 			die("connect failed: " . $this->conn->connect_error);
 		}
-		$this->conn->set_charset($config['mysql']['charset']);
-
+		
+		if (isset($config['charset'])) {
+			$this->conn->set_charset($config['charset']);
+		}
+		
         return $this->conn;
-    }
+	}
+	
     private function __clone(){}
 	
 	/**
@@ -36,7 +38,7 @@ class MysqlDB
 	 */
     public static function getInstance()
 	{
-        if(FALSE == (self::$_instance instanceof self)){
+        if(false == (self::$_instance instanceof self)){
             self::$_instance = new self();
         }
         return self::$_instance;
@@ -55,7 +57,7 @@ class MysqlDB
 	 * 
 	 * 获取单行结果
 	 */
-    public function getRow($sql, $type = MYSQL_ASSOC)
+    public function getRow($sql, $type = MYSQLI_ASSOC)
 	{
         $result = $this->query($sql);
 		
@@ -74,7 +76,7 @@ class MysqlDB
 	 * 
 	 * 获取多行结果
 	 */
-    public function getRows($sql, $type = MYSQL_ASSOC)
+    public function getRows($sql, $type = MYSQLI_ASSOC)
 	{
         $result = $this->query($sql);
 		
