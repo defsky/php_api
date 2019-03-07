@@ -1,6 +1,11 @@
 <?php
 namespace App;
 
+/**
+ * Person类
+ * 
+ * 测试用
+ */
 class Person
 {
     protected $name;

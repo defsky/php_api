@@ -4,8 +4,8 @@ namespace Core;
 /** 字符编码转换类, ANSI、Unicode、Unicode big endian、UTF-8、UTF-8+Bom互相转换
 
 * Usage:
-    $convertor = new CharsetConvertor('utf-8', 'ansi');
-    $ansi_str = $convertor->convert('some utf-8 str');
+*   $convertor = new CharsetConvertor('utf-8', 'ansi');
+*   $ansi_str = $convertor->convert('some utf-8 str');
     
 * Func:
 * public convert 转换
@@ -18,6 +18,7 @@ class CharsetConvertor
     private $_in_charset = null; // 源编码
     private $_out_charset = null; // 输出编码
     private $_allow_charset = array('utf-8', 'utf-8bom', 'ansi', 'unicode', 'unicodebe');
+    
     /** 初始化
      * @param String $in_charset 源编码
      * @param String $out_charset 输出编码

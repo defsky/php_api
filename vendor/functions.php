@@ -1,5 +1,6 @@
 <?php
 use Core\Config;
+use Core\Http\Request;
 
 /**
  * 获取env配置
@@ -21,4 +22,10 @@ function env($key, $default)
 function config($key)
 {
     return Config::getInstance()->get($key);
+}
+
+
+function Request()
+{
+    return Request::instance();
 }
